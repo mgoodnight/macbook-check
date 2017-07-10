@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 import re
 from twilio.rest import Client
 
-twilio = Client('<TWILIO_ACCOUNT>', '<TWILIO_TOKEN')
+twilio = Client('<TWILIO_ACCOUNT>', '<TWILIO_TOKEN>')
 f = open('macbooks', 'r+')
 macbooks = list()
 
@@ -40,4 +40,4 @@ if len(macbooks) > 0:
     sms_body = "Macbook(s) with i7 processor and 16GB of RAM listed: \n"
     for macbook in macbooks:
         sms_body += macbook[0] + ' -- ' + macbook[1] + "\n"
-    sms = twilio.messages.create(to='<TWILIO_TO>', from_='<TWILIO_FROM', body=sms_body)
+    sms = twilio.messages.create(to='<TWILIO_TO>', from_='<TWILIO_FROM>', body=sms_body)
