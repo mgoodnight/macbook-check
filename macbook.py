@@ -24,7 +24,6 @@ content_soup = BeautifulSoup(content)
 products = content_soup.find_all('tr', class_='product')
 
 for product in products:
-    details = ()
     product_specs = product.find_all('td', class_='specs')
     ram = re.search("16GB", product_specs[0].get_text()) 
     processor = re.search("Intel (i7|Core i7)", product_specs[0].get_text())
