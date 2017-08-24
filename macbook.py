@@ -12,12 +12,15 @@ import re
 from twilio.rest import Client
 
 twilio = Client('<TWILIO_ACCOUNT>', '<TWILIO_TOKEN>')
-f = open('macbooks', 'r+')
+f = open('macbooks', 'r+', encoding='utf-8')
 macbooks = list()
 
 known_macbooks = list()
 for macbook in f:
     known_macbooks.append(macbook.strip('\n'))
+
+f.close()
+f = open('macbooks', 'w', encoding='utf-8')
 
 content = requests.get('https://www.apple.com/shop/browse/home/specialdeals/mac/macbook_pro/13').text
 content_soup = BeautifulSoup(content)
@@ -34,6 +37,7 @@ for product in products:
         if known_macbooks.count(link) == 0:
             macbooks.append((price, link))
             f.write(link + "\n")
+f.close()
 
 if len(macbooks) > 0:
     sms_body = "Macbook(s) with i7 processor and 16GB of RAM listed: \n"
